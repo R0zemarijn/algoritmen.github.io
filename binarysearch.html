@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Binary search</title>
+    </head>
+
+<body>
+<h2>Linear search</h2>
+<p id="demo">Dit is de pagina van binary search.</p>
+</body> 
+
+<script>
+    var zoekGetal, i;
+    var volgorde;
+    var nummers = createArray(50);
+    var teller;
+    var zoekWaarde;
+
+    for (teller = 0; teller <= nummers.length - 1; teller++) {
+        nummers[teller] = Math.floor(Math.random() * 100);
+    }
+    weergaveArray(nummers);
+    sorteer(nummers);
+    window.alert("Welk getal wil je zoeken?");
+    zoekWaarde = Number(window.prompt('Enter a value for zoekWaarde'));
+    var beginIndex, eindIndex, middenIndex, index;
+
+    beginIndex = 0;
+    eindIndex = nummers.length - 1;
+    index = -1;
+    while (beginIndex <= eindIndex) {
+        middenIndex = beginIndex + (double) (eindIndex - beginIndex) / 2;
+        if (nummers[middenIndex] < zoekWaarde) {
+            beginIndex = middenIndex + 1;
+        } else {
+            if (nummers[middenIndex] > zoekWaarde) {
+                eindIndex = middenIndex - 1;
+            } else {
+                index = middenIndex;
+
+                // spring uit de while loop (simulatie van break)
+                beginIndex = eindIndex + 1;
+            }
+        }
+    }
+    if (index == -1) {
+        window.alert("Je zocht " + zoekWaarde + ", jammer die is niet gevonden");
+    } else {
+        window.alert("Je zocht " + zoekWaarde + ", die is gevonden op index " + index);
+    }
+
+function reverseSorteer(nummers) {
+    var i;
+    var j;
+    var temp;
+
+    for (i = 0; i <= nummers.length - 1; i++) {
+        for (j = 0; j <= nummers.length - i - 2; j++) {
+            if (nummers[j] < nummers[j + 1]) {
+                temp = nummers[j];
+                nummers[j] = nummers[j + 1];
+                nummers[j + 1] = temp;
+            }
+        }
+    }
+    window.alert("De gesorteerde waarde zijn");
+    weergaveArray(nummers);
+}
+
+function sorteer(nummers) {
+    var i;
+    var j;
+    var temp;
+
+    for (i = 0; i <= nummers.length - 1; i++) {
+        for (j = 0; j <= nummers.length - i - 2; j++) {
+            if (nummers[j] > nummers[j + 1]) {
+                temp = nummers[j];
+                nummers[j] = nummers[j + 1];
+                nummers[j + 1] = temp;
+            }
+        }
+    }
+    window.alert("De gesorteerde waarde zijn");
+    weergaveArray(nummers);
+}
+
+function weergaveArray(nummers) {
+    var teller;
+
+    for (teller = 0; teller <= nummers.length - 1; teller++) {
+        window.alert(nummers[teller]);
+    }
+}
+</script>
+</html>
